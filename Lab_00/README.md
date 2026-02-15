@@ -38,6 +38,8 @@
 
 <img src="../_Additional_Materials/Images/Lab_00_05.JPG" width="600" alt="Внесение измениний и исправлений.">
 
+<img src="../_Additional_Materials/Images/Lab_00_06.JPG" width="600" alt="Внесение измениний и исправлений (2).">
+
 6. Оформил данный отчёт в [Lab_00/Rare/README.md](./README.md).
 
 ## Консольные команды

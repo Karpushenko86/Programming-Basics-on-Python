@@ -17,6 +17,6 @@
   - [Python для начинающих](https://www.python.org/about/gettingstarted/)  
   - [Официальный туториал](https://docs.python.org/3/tutorial/)
 - **[LearnPython.org](https://www.learnpython.org/)**  
-- **[Exercism — Python Track](https://exercism.org/tracks/python)**  
-- **[Programiz — Learn Python Programming](https://www.programiz.com/python-programming)**  
+- **[Exercism. Python Track](https://exercism.org/tracks/python)**  
+- **[Programiz. Learn Python Programming](https://www.programiz.com/python-programming)**  
 - **[Codewars](https://www.codewars.com/)**  

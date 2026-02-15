@@ -34,9 +34,9 @@
 
 5. Закоммитил изменения и отправил на GitHub.
 
+<img src="../_Additional_Materials/Images/Lab_00_04.JPG" width="600" alt="Клонирование репозитория на компьютер.">
 
-
-7. Оформил данный отчёт в [Lab_00/Rare/README.md](./README.md).
+6. Оформил данный отчёт в [Lab_00/Rare/README.md](./README.md).
 
 ## Консольные команды
 

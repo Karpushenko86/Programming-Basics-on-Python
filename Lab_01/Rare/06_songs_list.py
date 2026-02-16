@@ -25,8 +25,10 @@ violator_songs_list = [
 
 # TODO здесь ваш код
 durations = []
+needed_songs = {'Halo', 'Enjoy the Silence', 'Clean'}
+
 for song, time in violator_songs_list:
-    if song in ['Halo', 'Enjoy the Silence', 'Clean']:
+    if song in needed_songs:
         durations.append(time)
 
 total_time = sum(durations)
@@ -53,9 +55,11 @@ violator_songs_dict = {
 
 # TODO здесь ваш код
 durations = []
-for song, time in violator_songs_list:
-    if song in ['Sweetest Perfection', 'Policy of Truth', 'Blue Dress']:
-        durations.append(time)
+other_songs = ['Sweetest Perfection', 'Policy of Truth', 'Blue Dress']
+
+for song in other_songs:
+    if song in violator_songs_dict:
+        durations.append(violator_songs_dict[song])
 
 total_time = sum(durations)
 

@@ -42,6 +42,15 @@
 
 6. Оформил данный отчёт в [Lab_00/Rare/README.md](./README.md).
 
+7. Ссылки на используемые материалы.
+- [Tutorial: Get started with Visual Studio Code](https://code.visualstudio.com/docs/getstarted/getting-started "Перейти по ссылке *ТЫК*")
+- [Working with GitHub in VS Code](https://code.visualstudio.com/docs/sourcecontrol/github)
+- [Doka Guide - Язык разметки Markdown](https://doka.guide/tools/markdown/ "Перейти по ссылке *ТЫК*") 
+- [GitHub - Демонстрационный пример отчёта в Markdown](https://github.com/still-coding/report_demo "Перейти по ссылке *ТЫК*")
+- [Марк Лутц. Изучаем Python. Том 1](https://github.com/Karpushenko86/Programming-Basics-on-Python/blob/main/_Additional_Materials/Books/Learning_Python_Tom_1.pdf "Перейти по ссылке *ТЫК*")
+- [Марк Лутц. Изучаем Python. Том 2](https://github.com/Karpushenko86/Programming-Basics-on-Python/blob/main/_Additional_Materials/Books/Learning_Python_Tom_2.pdf "Перейти по ссылке *ТЫК*")
+- [Allen Downey. Think Python](https://github.com/Karpushenko86/Programming-Basics-on-Python/blob/main/_Additional_Materials/Books/Think_Python.pdf "Перейти по ссылке *ТЫК*")
+
 ## Консольные команды
 
 ```bash

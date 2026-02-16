@@ -58,15 +58,32 @@ print()
 table_cost = store[goods['Стол' ]][0]['quantity']  * store[goods['Стол' ]][0]['price']
 print('Стол -', store[goods['Стол' ]][0]['quantity'], 'шт, стоимость', store[goods['Стол' ]][0]['price'], 'руб')
 print('Стол -', store[goods['Стол' ]][1]['quantity'], 'шт, стоимость', store[goods['Стол' ]][1]['price'], 'руб')
+temp_A  = store[goods['Стол' ]][0]['quantity']
+temp_A += store[goods['Стол' ]][1]['quantity']
+temp_B  = store[goods['Стол' ]][0]['price']
+temp_B += store[goods['Стол' ]][0]['price']
+print('Общее количество Столов -', temp_A, 'шт, их общая стоимость', temp_B, 'руб')
 print()
 
 sofa_cost  = store[goods['Диван']][0]['quantity'] * store[goods['Диван']][0]['price']
 print('Диван -', store[goods['Диван' ]][0]['quantity'], 'шт, стоимость', store[goods['Диван' ]][0]['price'], 'руб')
 print('Диван -', store[goods['Диван' ]][1]['quantity'], 'шт, стоимость', store[goods['Диван' ]][1]['price'], 'руб')
+temp_A  = store[goods['Диван' ]][0]['quantity']
+temp_A += store[goods['Диван' ]][1]['quantity']
+temp_B  = store[goods['Диван' ]][0]['price']
+temp_B += store[goods['Диван' ]][1]['price']
+print('Общее количество Диванов -', temp_A, 'шт, их общая стоимость', temp_B, 'руб')
 print()
 
 chair_cost = store[goods['Стул' ]][0]['quantity']  * store[goods['Стул' ]][0]['price']
 print('Стул -', store[goods['Стул' ]][0]['quantity'], 'шт, стоимость', store[goods['Стул' ]][0]['price'], 'руб')
 print('Стул -', store[goods['Стул' ]][1]['quantity'], 'шт, стоимость', store[goods['Стул' ]][1]['price'], 'руб')
 print('Стул -', store[goods['Стул' ]][2]['quantity'], 'шт, стоимость', store[goods['Стул' ]][2]['price'], 'руб')
+temp_A  = store[goods['Стул' ]][0]['quantity']
+temp_A += store[goods['Стул' ]][1]['quantity']
+temp_A += store[goods['Стул' ]][2]['quantity']
+temp_B  = store[goods['Стул' ]][0]['price']
+temp_B += store[goods['Стул' ]][1]['price']
+temp_B += store[goods['Стул' ]][2]['price']
+print('Общее количество Стульев -', temp_A, 'шт, их общая стоимость', temp_B, 'руб')
 print()

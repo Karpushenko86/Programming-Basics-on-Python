@@ -16,3 +16,8 @@ my_favorite_movies = 'Терминатор, Пятый элемент, Ават�
 # как указано в задании!
 
 # TODO здесь ваш код
+result = my_favorite_movies.split(", ")
+print(result[0])
+print(result[len(result) - 1])
+print(result[1])
+print(result[len(result) - 2])

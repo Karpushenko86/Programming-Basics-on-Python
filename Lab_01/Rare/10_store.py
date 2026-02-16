@@ -62,7 +62,7 @@ print('Стол -', store[goods['Стол' ]][1]['quantity'], 'шт, стоим�
 temp_A  = store[goods['Стол' ]][0]['quantity']
 temp_A += store[goods['Стол' ]][1]['quantity']
 temp_B  = store[goods['Стол' ]][0]['price'] * store[goods['Стол' ]][0]['quantity']
-temp_B += store[goods['Стол' ]][0]['price'] * store[goods['Стол' ]][1]['quantity']
+temp_B += store[goods['Стол' ]][1]['price'] * store[goods['Стол' ]][1]['quantity']
 print('Общее количество Столов -', temp_A, 'шт, их общая стоимость', temp_B, 'руб')
 print()
 

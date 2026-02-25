@@ -16,20 +16,20 @@ meadow_set = set(meadow)
 
 # выведите на консоль все виды цветов
 # TODO здесь ваш код
-or_flowers = set(garden) | set(meadow)
+or_flowers = garden_set | meadow_set
 print (f"\nВсе виды уникальных цветов: {or_flowers}")
 
 # выведите на консоль те, которые растут и там и там
 # TODO здесь ваш код
-and_flowers = set(garden) & set(meadow)
+and_flowers = garden_set & meadow_set
 print (f"Цветы, которые растут и там и там: {and_flowers}")
 
 # выведите на консоль те, которые растут в саду, но не растут на лугу
 # TODO здесь ваш код
-garden_glowers = or_flowers - set(meadow)
+garden_glowers = or_flowers - meadow_set
 print (f"Цветы, которые растут в саду, но не растут на лугу: {garden_glowers}")
 
 # выведите на консоль те, которые растут на лугу, но не растут в саду
 # TODO здесь ваш код
-meadow_flowers = or_flowers - set(garden)
+meadow_flowers = or_flowers - garden_set
 print (f"Цветы, которые растут на лугу, но не растут в саду: {meadow_flowers}\n")

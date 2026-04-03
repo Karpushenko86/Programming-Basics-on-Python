@@ -35,7 +35,7 @@
 - Автоматическое разбиение на непрерывные сегменты (разрывы не соединяются линией).
 - Адаптивная аннотация точки касания (всегда удобно расположена).
 - Сохранение графиков в папку `graphs/` с высоким качеством (dpi=320).
-- Полное соответствие PEP 8, PEP 257, PEP 484.
+- Полное соответствие PEP 8, PEP 20, PEP 257, PEP 484.
 
 ### Примеры графиков всех вариантов:
 
@@ -91,8 +91,13 @@
 
 ## Список использованных источников
 
-1. [NumPy Documentation — Mathematical functions](https://numpy.org/doc/stable/reference/routines.math.html)
-2. [Matplotlib: Pyplot tutorial](https://matplotlib.org/stable/tutorials/pyplot.html)
-3. [Python in Scientific Computing — Plotting with Matplotlib](https://scipy-lectures.org/intro/matplotlib/index.html)
-4. [Real Python — Basic Data Visualization with Matplotlib](https://realpython.com/python-matplotlib-guide/)
-5. [GeeksforGeeks — Matplotlib Tutorial](https://www.geeksforgeeks.org/matplotlib-tutorial/)
+1. [PEP 8 — Style Guide for Python Code ](https://peps.python.org/pep-0008/) 
+2. [PEP 20 — The Zen of Python ](https://peps.python.org/pep-0020/) 
+3. [PEP 257 — Docstring Conventions  ](https://peps.python.org/pep-0257/)
+4. [PEP 484 — Type Hints](https://peps.python.org/pep-0484/)
+5. [Matplotlib: Pyplot tutorial](https://matplotlib.org/stable/tutorials/pyplot.html)
+6. [GeeksforGeeks — Matplotlib Tutorial](https://www.geeksforgeeks.org/matplotlib-tutorial/)
+7. [NumPy Documentation — Mathematical functions](https://numpy.org/doc/stable/reference/routines.math.html)
+8. [Python in Scientific Computing — Plotting with Matplotlib](https://scipy-lectures.org/intro/matplotlib/index.html)
+9. [Real Python — Basic Data Visualization with Matplotlib](https://realpython.com/python-matplotlib-guide/)
+

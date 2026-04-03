@@ -37,45 +37,47 @@
 - Сохранение графиков в папку `graphs/` с высоким качеством (dpi=320).
 - Полное соответствие PEP 8, PEP 257, PEP 484.
 
-### Примеры графиков всех вариантов
+### Примеры графиков всех вариантов:
 
 Ниже представлены графики для всех 12 вариантов (нажми на изображение для увеличения):
 
+## Графики всех 12 вариантов
+
 **Вариант 1**  
-![Вариант 1](graphs/lab02_variant_01.png)
+<img src="graphs/lab02_variant_01.png" alt="Вариант 1" width="600">
 
 **Вариант 2**  
-![Вариант 2](graphs/lab02_variant_02.png)
+<img src="graphs/lab02_variant_02.png" alt="Вариант 2" width="600">
 
 **Вариант 3**  
-![Вариант 3](graphs/lab02_variant_03.png)
+<img src="graphs/lab02_variant_03.png" alt="Вариант 3" width="600">
 
 **Вариант 4**  
-![Вариант 4](graphs/lab02_variant_04.png)
+<img src="graphs/lab02_variant_04.png" alt="Вариант 4" width="600">
 
 **Вариант 5**  
-![Вариант 5](graphs/lab02_variant_05.png)
+<img src="graphs/lab02_variant_05.png" alt="Вариант 5" width="600">
 
 **Вариант 6**  
-![Вариант 6](graphs/lab02_variant_06.png)
+<img src="graphs/lab02_variant_06.png" alt="Вариант 6" width="600">
 
 **Вариант 7**  
-![Вариант 7](graphs/lab02_variant_07.png)
+<img src="graphs/lab02_variant_07.png" alt="Вариант 7" width="600">
 
 **Вариант 8**  
-![Вариант 8](graphs/lab02_variant_08.png)
+<img src="graphs/lab02_variant_08.png" alt="Вариант 8" width="600">
 
 **Вариант 9**  
-![Вариант 9](graphs/lab02_variant_09.png)
+<img src="graphs/lab02_variant_09.png" alt="Вариант 9" width="600">
 
 **Вариант 10**  
-![Вариант 10](graphs/lab02_variant_10.png)
+<img src="graphs/lab02_variant_10.png" alt="Вариант 10" width="600">
 
 **Вариант 11**  
-![Вариант 11](graphs/lab02_variant_11.png)
+<img src="graphs/lab02_variant_11.png" alt="Вариант 11" width="600">
 
 **Вариант 12**  
-![Вариант 12](graphs/lab02_variant_12.png)
+<img src="graphs/lab02_variant_12.png" alt="Вариант 12" width="600">
 
 ### Анализ результатов
 

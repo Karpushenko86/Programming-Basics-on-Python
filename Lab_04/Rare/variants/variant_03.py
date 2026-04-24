@@ -1,7 +1,7 @@
 """
 variant_03.py
 
-Решение Варианта 3 лабораторной работы №4 (Recursion).
+Вариант 3.
 """
 
 from typing import Any, List, Tuple, Callable 

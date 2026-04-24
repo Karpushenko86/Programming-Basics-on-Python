@@ -17,7 +17,7 @@ def clear_terminal() -> None:
 def save_result(variant: int, task: int, result: str) -> None:
     """Сохраняет результат задачи в файл results/variant_XX_task_Y.txt"""
     os.makedirs("results", exist_ok=True)
-    filename = f"Lab_03/results/variant_{variant:02d}_task_{task}.txt"
+    filename = f"Lab_03/Rare/results/variant_{variant:02d}_task_{task}.txt"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(result)
 

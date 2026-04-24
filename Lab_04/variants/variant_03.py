@@ -4,7 +4,7 @@ variant_03.py
 Решение Варианта 3 лабораторной работы №4 (Recursion).
 """
 
-from typing import Any, List
+from typing import Any, List, Tuple, Callable 
 
 from common import run_tasks_menu
 
@@ -130,7 +130,7 @@ def _task4() -> None:
 
 def run() -> None:
     """Точка входа для Варианта 3."""
-    tasks: Dict[int, Tuple[str, Callable[[], None]]] = {
+    tasks: dict[int, Tuple[str, Callable[[], None]]] = {
         1: ("Задача 1. Распаковка (рекурсия)", _task1),
         2: ("Задача 1. Распаковка (итерация)", _task2),
         3: ("Задача 2. Последовательность w_n (рекурсия)", _task3),

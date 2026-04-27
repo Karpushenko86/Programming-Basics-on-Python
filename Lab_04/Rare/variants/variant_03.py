@@ -8,7 +8,7 @@ variant_03.py
 2. Вычисление члена рекуррентной последовательности w_n.
 """
 
-from typing import Any, List, Tuple, Callable 
+from typing import Any, Iterable, List, Tuple, Callable 
 
 from common import run_tasks_menu
 
@@ -20,8 +20,9 @@ def unpack_recursive(data: Any) -> List[Any]:
 
     Поддерживаемые типы: int, str, list, tuple, dict, set, None и другие примитивы.
 
-    Терминальная ветвь: Элемент не является контейнером  добавляется в результат.
-    Рекурсивная ветвь: Контейнер рекурсивно распаковывается.
+    Терминальная ветвь: Элемент не является контейнером добавляется в результат.
+
+    Рекурсивная  ветвь: Контейнер рекурсивно распаковывается.
 
     Args:
         data: Вложенная структура произвольной глубины.
@@ -43,6 +44,37 @@ def unpack_recursive(data: Any) -> List[Any]:
             result.extend(unpack_recursive(value))
 
     return result
+
+
+def unpack_yield_from(data: Any) -> List[Any]:
+    """Рекурсивно распаковывает вложенную структуру в плоский список с помощью yield from.
+
+    Питонобразная реализация рекурсивной распаковки.
+    Использует внутренний генератор `helper` и конструкцию `yield from`.
+
+    Поддерживаемые типы: list, tuple, set, dict и любые примитивные типы.
+
+    Args:
+        data: Вложенная структура произвольной глубины.
+
+    Returns:
+        Плоский список всех найденных элементов (в порядке обхода).
+    """
+    def helper(item: Any) -> Iterable[Any]:
+
+        if not isinstance(item, (list, tuple, set, dict)):
+            yield item
+            return
+
+        if isinstance(item, (list, tuple, set)):
+            for sub_item in item:
+                yield from helper(sub_item)
+        else:
+            for key, value in item.items():
+                yield from helper(key)
+                yield from helper(value)
+
+    return list(helper(data))
 
 
 def unpack_iterative(data: Any) -> List[Any]:
@@ -136,22 +168,31 @@ def calculate_w_iterative(n: int) -> float:
 def _task1() -> None:
     """Задача 1. Рекурсивная распаковка вложенной структуры."""
     print("Рекурсивная версия unpack():")
-    test_data: Any = [None, [1, ({2, 3}, {"foo": "bar"})]]
+    test_data: Any = [None, [1, ({2, 3}, {"foo": "bar", "x": [10, 20]})]]
     result = unpack_recursive(test_data)
     print(f"Входные данные : {test_data}")
     print(f"Результат      : {result}")
 
 
 def _task2() -> None:
-    """Задача 1. Итеративная распаковка вложенной структуры."""
-    print("Итеративная версия unpack():")
-    test_data: Any = [None, [1, ({2, 3}, {"foo": "bar"})]]
-    result = unpack_iterative(test_data)
+    """Демонстрация распаковки с использованием yield from."""
+    print("Рекурсивная версия unpack() с использованием yield from:")
+    test_data: Any = [None, [1, ({2, 3}, {"foo": "bar", "x": [10, 20]})]]
+    result = unpack_yield_from(test_data)
     print(f"Входные данные : {test_data}")
     print(f"Результат      : {result}")
 
 
 def _task3() -> None:
+    """Задача 1. Итеративная распаковка вложенной структуры."""
+    print("Итеративная версия unpack():")
+    test_data: Any = [None, [1, ({2, 3}, {"foo": "bar", "x": [10, 20]})]]
+    result = unpack_iterative(test_data)
+    print(f"Входные данные : {test_data}")
+    print(f"Результат      : {result}")
+
+
+def _task4() -> None:
     """Задача 2. Рекурсивное вычисление последовательности w_n."""
     print("Рекурсивная версия calculate_w(n)")
     print("n".ljust(6), "w_n")
@@ -160,9 +201,9 @@ def _task3() -> None:
         print(f"{i:<6} {calculate_w_recursive(i):.10f}")
 
 
-def _task4() -> None:
+def _task5() -> None:
     """Задача 2. Итеративное вычисление последовательности w_n."""
-    print("Итеративная версия calculate_w(n)")
+    print("Итеративная версия calculate_w(n).")
     print("n".ljust(6), "w_n")
     print("-" * 20)
     for i in range(1, 11):
@@ -175,10 +216,12 @@ def run() -> None:
     Запускает меню заданий варианта 3 с четырьмя демонстрациями.
     """
     tasks: dict[int, Tuple[str, Callable[[], None]]] = {
-        1: ("Задача 1. Распаковка (рекурсия)", _task1),
-        2: ("Задача 1. Распаковка (итерация)", _task2),
-        3: ("Задача 2. Последовательность w_n (рекурсия)", _task3),
-        4: ("Задача 2. Последовательность w_n (итерация)", _task4),
+        1 : ("Задача 1. Распаковка (рекурсия)", _task1),
+        2 : ("Задача 1. Распаковка (рекурсия c yield from)", _task2),
+        3 : ("Задача 1. Распаковка (итерация)", _task3),
+        4 : ("Задача 2. Последовательность w_n (рекурсия)", _task4),
+        5 : ("Задача 2. Последовательность w_n (итерация)", _task5),
+
     }
     run_tasks_menu(3, tasks)
 

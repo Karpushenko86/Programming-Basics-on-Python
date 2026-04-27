@@ -20,8 +20,8 @@ def unpack_recursive(data: Any) -> List[Any]:
 
     Поддерживаемые типы: int, str, list, tuple, dict, set, None и другие примитивы.
 
-    Терминальная ветвь: элемент не является контейнером — добавляется в результат.
-    Рекурсивная ветвь: контейнер рекурсивно распаковывается.
+    Терминальная ветвь: Элемент не является контейнером  добавляется в результат.
+    Рекурсивная ветвь: Контейнер рекурсивно распаковывается.
 
     Args:
         data: Вложенная структура произвольной глубины.
@@ -29,18 +29,18 @@ def unpack_recursive(data: Any) -> List[Any]:
     Returns:
         Плоский список всех найденных элементов (в порядке обхода).
     """
+    if not isinstance(data, (list, tuple, set, dict)):
+        return [data]
+
     result: List[Any] = []
 
     if isinstance(data, (list, tuple, set)):
         for item in data:
             result.extend(unpack_recursive(item))
-    elif isinstance(data, dict):
+    else:  
         for key, value in data.items():
             result.extend(unpack_recursive(key))
             result.extend(unpack_recursive(value))
-    else:
-        # Терминальная ветвь
-        result.append(data)
 
     return result
 

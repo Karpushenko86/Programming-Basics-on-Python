@@ -198,22 +198,28 @@ def _task4() -> None:
     print("n".ljust(6), "w_n")
     print("-" * 60)
     for i in range(1, 11):
-        print(f"{i:<6} {calculate_w_recursive(i):.10f}")
+        if calculate_w_iterative(i) > 0:
+            print(f"{i:<7} {calculate_w_recursive(i):.10f}")
+        else:
+            print(f"{i:<6} {calculate_w_recursive(i):.10f}")
 
 
 def _task5() -> None:
     """Задача 2. Итеративное вычисление последовательности w_n."""
     print("Итеративная версия calculate_w(n).")
     print("n".ljust(6), "w_n")
-    print("-" * 20)
+    print("-" * 60)
     for i in range(1, 11):
-        print(f"{i:<6} {calculate_w_iterative(i):.10f}")
+        if calculate_w_iterative(i) > 0:
+            print(f"{i:<7} {calculate_w_iterative(i):.10f}")
+        else:
+            print(f"{i:<6} {calculate_w_iterative(i):.10f}")
 
 
 def run() -> None:
     """Точка входа для Варианта 3.
 
-    Запускает меню заданий варианта 3 с четырьмя демонстрациями.
+    Запускает меню заданий Варианта 3 с пятью демонстрациями.
     """
     tasks: dict[int, Tuple[str, Callable[[], None]]] = {
         1 : ("Задача 1. Распаковка (рекурсия)", _task1),

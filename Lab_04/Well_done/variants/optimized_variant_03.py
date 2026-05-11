@@ -4,6 +4,8 @@ variant_03_optimized.py
 Вариант 3.
 Повысьте производительность своих функций минимум в 2 раза относительно исходных вариатов решения.
 """
+
+
 from functools import lru_cache
 from collections import deque
 from typing import Any
@@ -70,19 +72,33 @@ def calculate_w_iterative_optimized(n: int) -> float:
 
 #region Optimized unpack_*
 
+def _make_hashable(data: Any) -> Any:
+    """Преобразует произвольную структуру данных в хэшируемую форму.
+
+    Необходима для корректной работы lru_cache с вложенными
+    списками, словарями и множествами.
+    """
+    if isinstance(data, (list, tuple)):
+        return tuple(_make_hashable(x) for x in data)
+    if isinstance(data, set):
+        return frozenset(_make_hashable(x) for x in data)
+    if isinstance(data, dict):
+        return tuple(sorted((k, _make_hashable(v)) for k, v in data.items()))
+    return data
+
+
 @lru_cache(maxsize=None)
 def unpack_recursive_optimized(data: Any) -> tuple[Any, ...]:
     """Рекурсивная распаковка с мемоизацией (lru_cache).
-
-    Возвращает tuple (а не list), чтобы результат был хэшируемым
-    и мог кэшироваться.
 
     Args:
         data: Вложенная структура (list, tuple, set, dict, примитивы).
 
     Returns:
-        Кортеж со всеми "листовыми" элементами в порядке обхода.
+        Возвращает tuple для возможности кэширования.
     """
+    if data is None:
+        return (None,)
     if not isinstance(data, (list, tuple, set, dict)):
         return (data,)
 
@@ -108,8 +124,10 @@ def unpack_iterative_optimized(data: Any) -> list[Any]:
         data: Вложенная структура (list, tuple, set, dict, примитивы).
 
     Returns:
-        Плоский список, содержащий все примитивные значения и элементы пар (ключ, значение) из словарей.
+        Плоский список, содержащий все значения и элементы пар (ключ, значение) из словарей.
     """
+    if data is None:
+        return [None]
     if not data:
         return []
 

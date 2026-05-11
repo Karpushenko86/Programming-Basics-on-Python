@@ -17,7 +17,7 @@ from Rare.variants.variant_03 import (
 )
 
 # Оптимизированные реализации (Well-done)
-from ..variants.optimized_variant_03 import (
+from Well_done.variants.optimized_variant_03 import (
     calculate_w_recursive_optimized,
     calculate_w_iterative_optimized,
     unpack_iterative_optimized,

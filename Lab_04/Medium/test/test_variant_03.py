@@ -5,6 +5,7 @@ test_variant_03.py
 Проверяем корректность реализаций unpack_* и calculate_w_* через тесты.
 """
 
+
 from typing import Any
 
 import pytest
@@ -65,18 +66,27 @@ EXPECTED_W = {
     [unpack_recursive, unpack_yield_from, unpack_iterative],
     ids=["unpack_recursive", "unpack_yield_from", "unpack_iterative"]
 )
-def test_unpack_all_implementations_equal(unpack_func) -> None:
-    """Все три реализации unpack должны возвращать одинаковый результат."""
+def test_unpack_implementations(unpack_func) -> None:
+    """Проверяет, что все реализации unpack_* возвращают одинаковый результат.
+
+    Сравнивает поведение recursive, yield_from и iterative реализаций
+    на сложном вложенном примере.
+    """
     case = EXPECTED_UNPACK["full_example"]
     assert unpack_func(case["data"]) == case["expected"]
 
 
 @pytest.mark.parametrize(
-    "case_name", list(EXPECTED_UNPACK.keys()), 
-    ids=lambda name: f"unpack_case_{name}"
+    "case_name", 
+    list(EXPECTED_UNPACK.keys()), 
+    ids=lambda x: f"unpack_case_{x}"
 )
-def test_unpack_known_cases(case_name: str) -> None:
-    """Проверка всех документированных кейсов распаковки."""
+def test_unpack_all_cases(case_name: str) -> None:
+    """Проверяет все известные кейсы распаковки для каждой реализации.
+
+    Args:
+        case_name: Ключ тестового случая из EXPECTED_UNPACK.
+    """
     case = EXPECTED_UNPACK[case_name]
     for func in (unpack_recursive, unpack_yield_from, unpack_iterative):
         assert func(case["data"]) == case["expected"]
@@ -87,19 +97,25 @@ def test_unpack_known_cases(case_name: str) -> None:
 #region calculate_w_* tests
 
 def test_calculate_w_base_cases() -> None:
-    """Проверка базовых значений w_1 и w_2."""
+    """Проверяет базовые значения последовательности w_n.
+
+    w(1) = 0.3 и w(2) = -1.5 должны возвращаться всеми реализациями.
+    """
     assert calculate_w_recursive(1) == pytest.approx(0.3)
     assert calculate_w_iterative(1) == pytest.approx(0.3)
     assert calculate_w_recursive(2) == pytest.approx(-1.5)
     assert calculate_w_iterative(2) == pytest.approx(-1.5)
 
 
-@pytest.mark.parametrize("n", range(1, 11), ids=lambda n: f"n={n}")
-def test_calculate_w_recursive_equals_iterative(n: int) -> None:
-    """Рекурсивная и итеративная версии должны давать одинаковый результат."""
-    rec = calculate_w_recursive(n)
-    it = calculate_w_iterative(n)
-    assert rec == pytest.approx(it, abs=1e-12)
+@pytest.mark.parametrize(
+    "n", 
+    range(1, 11), 
+    ids=lambda n: f"w_n={n}")
+def test_calculate_w_equal_implementations(n: int) -> None:
+    """Проверяет, что рекурсивная и итеративная версии дают одинаковый результат."""
+    assert calculate_w_recursive(n) == pytest.approx(
+        calculate_w_iterative(n), abs=1e-12
+    )
 
 
 @pytest.mark.parametrize(
@@ -108,34 +124,21 @@ def test_calculate_w_recursive_equals_iterative(n: int) -> None:
     ids=[f"w_n={n}" for n in EXPECTED_W]
 )
 def test_calculate_w_known_values(n: int, expected: float) -> None:
-    """Проверка известных значений последовательности w_n до n = 10."""
+    """Проверяет корректность вычисления известных значений w_n до n=10.
+
+    Args:
+        n: Порядковый номер члена последовательности.
+        expected: Ожидаемое значение с высокой точностью.
+    """
     assert calculate_w_recursive(n) == pytest.approx(expected, abs=1e-12)
     assert calculate_w_iterative(n) == pytest.approx(expected, abs=1e-12)
 
-
-# @pytest.mark.parametrize(
-#     "func_name, func",
-#     [("iterative", calculate_w_iterative), ("recursive", calculate_w_recursive)],
-#     ids=lambda x: x[0]
-# )
-# def test_calculate_w_large_n(func) -> None:
-#     """Проверка поведения на большом n.
-
-#     Итеративная версия работает даже при n = 1000,
-#     рекурсивная - падает раньше (демонстрация преимущества).
-#     """
-#     large_n = 1000 if func is calculate_w_iterative else 30
-#     result = func(large_n)
-#     assert isinstance(result, float)
-#     assert not (abs(result) == float("inf") or result != result)
-
 #endregion
 
-
-#region Error handling tests
-
 @pytest.mark.parametrize(
-    "func", [calculate_w_recursive, calculate_w_iterative], ids=["recursive", "iterative"]
+    "func", 
+    [calculate_w_recursive, calculate_w_iterative], 
+    ids=["recursive", "iterative"]
 )
 def test_calculate_w_raises_on_invalid_input(func) -> None:
     """Проверка реакции функций calculate_w на некорректные входные данные."""

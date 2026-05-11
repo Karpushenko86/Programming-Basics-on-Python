@@ -146,6 +146,11 @@ def calculate_w_iterative(n: int) -> float:
     Returns:
         Значение w_n как float.
     """
+    if not isinstance(n, int):
+        raise TypeError("Передаваемое N должено быть целым числом")
+    if n < 1:
+        raise ValueError(f"Передаваемое N должено быть >= 1, получено {n}")
+
     if n == 1:
         return 0.3
     if n == 2:

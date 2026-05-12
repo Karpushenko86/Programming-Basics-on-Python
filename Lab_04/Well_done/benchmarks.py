@@ -85,7 +85,7 @@ def run_benchmark() -> None:
         [[[[[1, 2, 3]]]]],
     ] * small_n
 
-    # === Unpack functions ===
+    # === unpack_* functions ===
     print(f"UNPACK FUNCTIONS (n = {small_n})".center(width, '-'))
 
     timer(unpack_iterative_original)(test_data)
@@ -95,7 +95,7 @@ def run_benchmark() -> None:
 
     print()
 
-    # === calculate_w functions ===
+    # === calculate_w_* functions ===
     title = (f"CALCULATE_W FUNCTIONS (n = {large_n})".center(width, '-'))
     print(title.center(width))
 

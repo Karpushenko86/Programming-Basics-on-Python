@@ -24,8 +24,10 @@ def calculate_w_recursive_optimized(n: int) -> float:
         Значение n-го члена последовательности w_n.
 
     Raises:
-        RecursionError: При очень большом n (маловероятно из-за кэша).
+        ValueError: если n < 1.
     """
+    if n < 1:
+        raise ValueError("n должен быть >= 1")
     if n == 1:
         return 0.3
     if n == 2:
@@ -47,19 +49,18 @@ def calculate_w_iterative_optimized(n: int) -> float:
     Returns:
         Значение n-го члена последовательности w_n.
     """
+    if n < 1:
+        raise ValueError("n должен быть >= 1")
     if n == 1:
         return 0.3
     if n == 2:
         return -1.5
-
     w_prev2 = 0.3
     w_prev1 = -1.5
-
     for i in range(3, n + 1):
         w_current = w_prev1 * w_prev2 * ((i - 1) ** 2) / ((i + 1) ** 3)
         w_prev2 = w_prev1
         w_prev1 = w_current
-
     return w_prev1
 
 #endregion
@@ -123,18 +124,15 @@ def unpack_recursive_optimized(data: Any) -> tuple[Any, ...]:
     result: list[Any] = []
 
     def _helper(item: Any) -> None:
-        """Внутренний рекурсивный помощник с прямым append в общий список."""
-        if not isinstance(item, (list, tuple, set, dict)):
-            result.append(item)
-            return
-
         if isinstance(item, (list, tuple, set)):
             for sub_item in item:
                 _helper(sub_item)
-        else:  # dict
+        elif isinstance(item, dict):
             for key, value in item.items():
                 _helper(key)
                 _helper(value)
+        else:
+            result.append(item)
 
     _helper(data)
     return tuple(result)
@@ -156,7 +154,7 @@ def unpack_iterative_optimized(data: Any) -> list[Any]:
         return []
 
     result: list[Any] = []
-    queue: deque = deque([data])
+    queue: deque[Any] = deque([data])
 
     while queue:
         current = queue.popleft()

@@ -25,6 +25,7 @@ from Lab_04.Well_done.variants.optimized_variant_03 import (
 
 T = TypeVar("T")
 P = ParamSpec("P")
+width: int = 70
 
 
 def timer(func: Callable[P, T]) -> Callable[P, T]:
@@ -37,7 +38,7 @@ def timer(func: Callable[P, T]) -> Callable[P, T]:
             return func(*args, **kwargs)
         finally:
             duration = perf_counter() - start
-            print(f"{func.__name__:<35} = {duration:9.6f} сек")
+            print(f"{func.__name__:<35} = {duration:9.6f} сек".center(width))
 
     return wrapper
 
@@ -46,7 +47,6 @@ def timer(func: Callable[P, T]) -> Callable[P, T]:
 
 def run_benchmark() -> None:
     """Запускает все замеры производительности с красивым оформлением."""
-    width: int = 70
 
     double_line = "=" * width
 
@@ -56,6 +56,9 @@ def run_benchmark() -> None:
 
 
     # === Усложнённые тестовые данные ===
+    small_n = 5
+    large_n = 10    # Не рекомендуется использовать значение больше 30 (время выполнения > 1.5 сек)
+
     test_data: Any = [
         None,
         42,
@@ -79,12 +82,10 @@ def run_benchmark() -> None:
         },
         (True, False, None, 3.14159, {"nested_tuple": (1, 2, [3, 4])}),
         [[[[[1, 2, 3]]]]],
-    ]
-    
-    large_n = 10
+    ] * small_n
 
     # === Unpack functions ===
-    print("UNPACK FUNCTIONS".center(width, '-'))
+    print(f"UNPACK FUNCTIONS (n = {small_n})".center(width, '-'))
 
     timer(unpack_iterative_original)(test_data)
     timer(unpack_iterative_optimized)(test_data)

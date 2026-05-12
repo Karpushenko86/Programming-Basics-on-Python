@@ -25,6 +25,7 @@ from Lab_04.Well_done.variants.optimized_variant_03 import (
 
 T = TypeVar("T")
 P = ParamSpec("P")
+
 width: int = 70
 
 
@@ -46,7 +47,7 @@ def timer(func: Callable[P, T]) -> Callable[P, T]:
 # ========================== БЕНЧМАРК ==============================
 
 def run_benchmark() -> None:
-    """Запускает все замеры производительности с красивым оформлением."""
+    """Запускает все замеры производительности unpack_* и calculate_w_* функций."""
 
     double_line = "=" * width
 

@@ -37,7 +37,8 @@ def run_tasks_menu(
         clear_terminal()
         print(f"Вариант {variant_num}".center(WIDTH))
         print("=" * WIDTH)
-        print("Выберите задание:")
+        print("Выберите задание:".center(WIDTH))
+        print("=" * WIDTH)
 
         for num in sorted(task_functions.keys()):
             name, _ = task_functions[num]
@@ -63,9 +64,14 @@ def run_tasks_menu(
                 print("=" * WIDTH)
                 func()                    
                 print("=" * WIDTH)
-            else:
-                print("Некорректный номер задания.")
+            if task_num not in task_functions:
+                clear_terminal()
+                print(f"""
+                      \nНекорректный ввод. 
+                      \nВы ввели: {choice}. 
+                      \nПожалуйста, введите число от 1 до {len(task_functions)}.
+                      """)
         except ValueError:
             print("Ошибка: введите число.")
 
-        input("\nНажмите Enter для возврата в меню заданий...")
+        input("Нажмите Enter для возврата в меню выбора заданий...")

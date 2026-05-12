@@ -7,29 +7,30 @@ main.py
 import sys
 from typing import Dict, Callable
 
-from common import clear_terminal
+from .common import clear_terminal
 
-from variants.variant_01 import run as var_01
-from variants.variant_02 import run as var_02
-from variants.variant_03 import run as var_03
-from variants.variant_04 import run as var_04
-from variants.variant_05 import run as var_05
-from variants.variant_06 import run as var_06
-from variants.variant_07 import run as var_07
-from variants.variant_08 import run as var_08
-from variants.variant_09 import run as var_09
-from variants.variant_10 import run as var_10
-from variants.variant_11 import run as var_11
-from variants.variant_12 import run as var_12
+from .variants.variant_01 import run as var_01
+from .variants.variant_02 import run as var_02
+from .variants.variant_03 import run as var_03
+from .variants.variant_04 import run as var_04
+from .variants.variant_05 import run as var_05
+from .variants.variant_06 import run as var_06
+from .variants.variant_07 import run as var_07
+from .variants.variant_08 import run as var_08
+from .variants.variant_09 import run as var_09
+from .variants.variant_10 import run as var_10
+from .variants.variant_11 import run as var_11
+from .variants.variant_12 import run as var_12
 
 
-NUMBER_OF_VARIANTS = 12
+NUMBER_OF_VARIANTS: int = 12
 
+width: int = 60
 
 def show_menu() -> None:
     """Выводит главное меню программы с перечнем доступных вариантов."""
-    print("\nЛабораторная работа №4 — Рекурсия")
-    print("=" * 60)
+    print("\nЛабораторная работа №4 — Модуль [ Rare ]")
+    print("=" * width)
     print(f"Выберите вариант (1-{NUMBER_OF_VARIANTS}) или действие:")
 
     for i in range(NUMBER_OF_VARIANTS):
@@ -37,7 +38,7 @@ def show_menu() -> None:
         print(f"  {num:2d} — Вариант {num}")
 
     print("   0 — Выход из программы")
-    print("=" * 60)
+    print("=" * width)
 
 
 def main() -> None:

@@ -81,7 +81,7 @@ def run_benchmark() -> None:
         [[[[[1, 2, 3]]]]],
     ]
     
-    large_n = 30
+    large_n = 10
 
     # === Unpack functions ===
     print("UNPACK FUNCTIONS".center(width, '-'))

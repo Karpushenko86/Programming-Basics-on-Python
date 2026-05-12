@@ -68,57 +68,77 @@ def calculate_w_iterative_optimized(n: int) -> float:
 #region Optimized unpack
 
 def _make_hashable(data: Any) -> Any:
-    """Преобразует произвольную структуру данных в полностью хэшируемую форму.
-
-    Используется внутренне для корректной работы lru_cache.
-    """
+    """Преобразует структуру в полностью хэшируемую форму (рекурсивно)."""
     if isinstance(data, (list, tuple)):
         return tuple(_make_hashable(x) for x in data)
     if isinstance(data, set):
         return frozenset(_make_hashable(x) for x in data)
     if isinstance(data, dict):
-        hashable_items = [
-            (_make_hashable(k), _make_hashable(v)) 
-            for k, v in data.items()
-            ]
-        return tuple(sorted(hashable_items))
+        return tuple((_make_hashable(k), _make_hashable(v)) for k, v in data.items())
     return data
 
 
 @lru_cache(maxsize=None)
 def _unpack_recursive_cached(hashable: Any) -> tuple[Any, ...]:
-    """Внутренняя кэшируемая функция для рекурсивной распаковки.
+    """Сверхбыстрая кэшируемая рекурсивная распаковка (tuple-конкатенация)."""
+    if not isinstance(hashable, (tuple, frozenset)):
+        return (hashable,)
 
-    Принимает только хэшируемые данные.
-    """
-    result: list[Any] = []
-
-    if isinstance(hashable, (tuple, frozenset)):
-        for item in hashable:
-            result.extend(_unpack_recursive_cached(item))
-    elif isinstance(hashable, tuple) and hashable and isinstance(hashable[0], tuple):
+    # Dict case: строго tuple из 2-элементных кортежей (key, value)
+    if (
+        isinstance(hashable, tuple)
+        and hashable
+        and all(isinstance(item, tuple) and len(item) == 2 for item in hashable)
+    ):
+        result: tuple[Any, ...] = ()
         for k, v in hashable:
-            result.extend(_unpack_recursive_cached(k))
-            result.extend(_unpack_recursive_cached(v))
-    else:
-        result.append(hashable)
+            result += _unpack_recursive_cached(k) + _unpack_recursive_cached(v)
+        return result
 
-    return tuple(result)
+    # Обычный tuple / frozenset
+    result: tuple[Any, ...] = ()
+    for item in hashable:
+        result += _unpack_recursive_cached(item)
+    return result
+
 
 
 def unpack_recursive_optimized(data: Any) -> tuple[Any, ...]:
-    """Рекурсивная распаковка вложенных структур с мемоизацией (lru_cache).
+    """Рекурсивная распаковка с оптимизированным аккумулятором.
+
+    Ускоренная распаковка относительно оригинальной unpack_recursive_*
+    за счёт минимального количества аллокаций списков.
 
     Args:
-        data: Вложенная структура (list, tuple, set, dict, None или примитив).
+        data: Вложенная структура произвольной глубины.
 
     Returns:
-        Кортеж со всеми "листовыми" элементами в порядке глубинного обхода.
+        Кортеж всех элементов в порядке обхода.
     """
     if data is None:
         return (None,)
-    hashable = _make_hashable(data)
-    return _unpack_recursive_cached(hashable)
+    if not data:
+        return ()
+
+    result: list[Any] = []
+
+    def _helper(item: Any) -> None:
+        """Внутренний рекурсивный помощник с прямым append в общий список."""
+        if not isinstance(item, (list, tuple, set, dict)):
+            result.append(item)
+            return
+
+        if isinstance(item, (list, tuple, set)):
+            for sub_item in item:
+                _helper(sub_item)
+        else:  # dict
+            for key, value in item.items():
+                _helper(key)
+                _helper(value)
+
+    _helper(data)
+    return tuple(result)
+
 
 
 def unpack_iterative_optimized(data: Any) -> list[Any]:

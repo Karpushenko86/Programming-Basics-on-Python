@@ -67,8 +67,7 @@ def _select_variant(level_name: str) -> int | None:
 def _run_rare() -> None:
     """Запускает модуль Rare через subprocess.
 
-    Выполняет запуск главного меню упрощённой версии лабораторной работы
-    (пакет Lab_04.Rare.main).
+    Выполняет запуск модуля "Rare" как отдельный подпроцесс из Lab_04.Rare.main.
     """
     print("\nЗапускаем меню заданий модуля [ Rare ]...\n")
     try:

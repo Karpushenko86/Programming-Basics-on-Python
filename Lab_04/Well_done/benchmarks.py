@@ -9,6 +9,7 @@ from typing import Any, Callable, TypeVar, ParamSpec
 from functools import wraps
 from time import perf_counter
 
+
 from Lab_04.Rare.variants.variant_03 import (
     calculate_w_iterative as calculate_w_iterative_original,
     calculate_w_recursive as calculate_w_recursive_original,
@@ -23,12 +24,15 @@ from Lab_04.Well_done.variants.optimized_variant_03 import (
 )
 
 
+#region Type definitions and constants
 T = TypeVar("T")
 P = ParamSpec("P")
 
 width: int = 70
+#endregion
 
 
+#region Timer decorator
 def timer(func: Callable[P, T]) -> Callable[P, T]:
     """Декоратор для замера времени выполнения функции."""
     @wraps(func)
@@ -42,10 +46,10 @@ def timer(func: Callable[P, T]) -> Callable[P, T]:
             print(f"{func.__name__:<35} = {duration:9.6f} сек".center(width))
 
     return wrapper
+#endregion
 
 
-# ========================== БЕНЧМАРК ==============================
-
+# region Main benchmark
 def run_benchmark() -> None:
     """Запускает все замеры производительности unpack_* и calculate_w_* функций."""
 
@@ -56,7 +60,7 @@ def run_benchmark() -> None:
     print(double_line + "\n")
 
 
-    # === Усложнённые тестовые данные ===
+    #region Tested Data
     small_n = 5
     large_n = 10    # Не рекомендуется использовать значение больше 30 (время выполнения > 1.5 сек)
 
@@ -84,18 +88,20 @@ def run_benchmark() -> None:
         (True, False, None, 3.14159, {"nested_tuple": (1, 2, [3, 4])}),
         [[[[[1, 2, 3]]]]],
     ] * small_n
+    #endregion
 
-    # === unpack_* functions ===
+    #region unpack_* functions
     print(f"UNPACK FUNCTIONS (n = {small_n})".center(width, '-'))
 
     timer(unpack_iterative_original)(test_data)
     timer(unpack_iterative_optimized)(test_data)
     timer(unpack_recursive_original)(test_data)
     timer(unpack_recursive_optimized)(test_data)
+    #endregion
 
     print()
 
-    # === calculate_w_* functions ===
+    #region calculate_w_* functions
     title = (f"CALCULATE_W FUNCTIONS (n = {large_n})".center(width, '-'))
     print(title.center(width))
 
@@ -103,8 +109,10 @@ def run_benchmark() -> None:
     timer(calculate_w_iterative_optimized)(large_n)
     timer(calculate_w_recursive_original)(large_n)
     timer(calculate_w_recursive_optimized)(large_n)
+    #endregion
 
     print("\n" + double_line)
+#endregion
 
 
 if __name__ == "__main__":

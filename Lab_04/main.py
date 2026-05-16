@@ -2,7 +2,7 @@
 main.py
 
 Главное консольное меню Лабораторной работы №4.
-Унифицированное консольное меню для запуска модулей Rare / Medium / Well-done.
+Унифицированное меню для запуска модулей Rare / Medium / Well-done.
 """
 
 import subprocess
@@ -15,7 +15,19 @@ NUMBER_OF_VARIANTS: int = 12
 width: int = 60
 
 def _select_variant(level_name: str) -> int | None:
-    """Простое меню выбора варианта 1–12"""
+    """Отображает интерактивное меню выбора варианта Лабораторной работы.
+
+    Функция выводит нумерованный список вариантов от 1 до NUMBER_OF_VARIANTS,
+    обрабатывает ввод пользователя и возвращает выбранный вариант.
+
+    Args:
+        level_name (str): Название модуля ("Medium" или "Well-done")
+                          для правильного заголовка.
+
+    Returns:
+        int | None: Номер варианта (от 1 до NUMBER_OF_VARIANTS) или None при выборе выхода.
+
+    """
     while True:
         clear_terminal()
 
@@ -53,7 +65,11 @@ def _select_variant(level_name: str) -> int | None:
 
 
 def _run_rare() -> None:
-    """Запускает полное меню заданий модуля Rare."""
+    """Запускает модуль Rare через subprocess.
+
+    Выполняет запуск главного меню упрощённой версии лабораторной работы
+    (пакет Lab_04.Rare.main).
+    """
     print("\nЗапускаем меню заданий модуля [ Rare ]...\n")
     try:
         subprocess.run(
@@ -65,7 +81,11 @@ def _run_rare() -> None:
 
 
 def _run_medium(variant: int) -> None:
-    """Запускает pytest для выбранного варианта Medium."""
+    """Запускает pytest-тесты для выбранного варианта модуля Medium.
+
+    Args:
+        variant (int): Номер варианта от 1 до NUMBER_OF_VARIANTS.
+    """
     test_file = f"Lab_04/Medium/test/test_variant_{variant:02d}.py"
     print(f"\nЗапускаем тесты из модуля [ Medium ] — Вариант {variant:02d}...\n")
     try:
@@ -78,7 +98,11 @@ def _run_medium(variant: int) -> None:
 
 
 def _run_well_done(variant: int) -> None:
-    """Запускает бенчмарк модуля [ Well-done ]."""
+    """Запускает бенчмарки для модуля Well-done.
+
+    Args:
+        variant (int): Номер варианта от 1 до NUMBER_OF_VARIANTS.
+    """
     print(f"\nЗапускаем бенчмарк Well-done - Вариант {variant:02d}...\n")
     try:
         subprocess.run(
@@ -90,7 +114,17 @@ def _run_well_done(variant: int) -> None:
 
 
 def main() -> None:
-    """Главное консольное меню Лабораторной работы №4."""
+    """Главное консольное меню лабораторной работы №4.
+
+    Функция реализует интерактивное меню для выбора модуля заданий:
+    - Запуск модуля [   Rare   ]
+    - Запуск модуля [  Medium  ]
+    - Запуск модуля [ Well-done]
+    - Выход из программы
+
+    Обрабатывает выбор пользователя, запуск соответствующих модулей,
+    выбор варианта и корректный выход из программы.
+    """
     levels: Dict[int, tuple[str, callable]] = {
         1: ("Rare", _run_rare),
         2: ("Medium", lambda v: _run_medium(v)),

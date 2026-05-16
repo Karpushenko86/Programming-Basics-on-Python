@@ -1,8 +1,8 @@
 """
 main.py
 
-Главное консольное меню лабораторной №4.
-Один входной файл для Rare / Medium / Well-done.
+Главное консольное меню Лабораторной работы №4.
+Унифицированное консольное меню для запуска модулей Rare / Medium / Well-done.
 """
 
 import subprocess
@@ -53,7 +53,7 @@ def _select_variant(level_name: str) -> int | None:
 
 
 def _run_rare() -> None:
-    """Запускает полное меню Rare (как было раньше)."""
+    """Запускает полное меню заданий модуля Rare."""
     print("\nЗапускаем меню заданий модуля [ Rare ]...\n")
     try:
         subprocess.run(
@@ -90,7 +90,7 @@ def _run_well_done(variant: int) -> None:
 
 
 def main() -> None:
-    """Главное меню лабораторной №4."""
+    """Главное консольное меню Лабораторной работы №4."""
     levels: Dict[int, tuple[str, callable]] = {
         1: ("Rare", _run_rare),
         2: ("Medium", lambda v: _run_medium(v)),
@@ -100,7 +100,7 @@ def main() -> None:
     while True:
         clear_terminal()
         print("\n" + "=" * width)
-        print("ЛАБОРАТОРНАЯ №4 — Главное меню".center(width))
+        print("ЛАБОРАТОРНАЯ РАБОТА №4 — Главное меню".center(width))
         print("=" * width)
         print("   1 — Запуск модуля [   Rare   ]".center(width//2))
         print("   2 — Запуск модуля [  Medium  ]".center(width//2))
